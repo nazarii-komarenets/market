@@ -33,7 +33,7 @@ class ListProducts extends Component implements HasForms, HasTable
             ->columns([
                 Stack::make([
                     ImageColumn::make('images.0')
-                        ->defaultImageUrl('/storage/products/images/default.png')
+                        ->defaultImageUrl('/images/product/default.png')
                         ->width('100%')
                         ->height('auto')
                         ->extraImgAttributes([
