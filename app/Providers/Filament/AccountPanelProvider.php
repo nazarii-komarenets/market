@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Http\Middleware\IsAdmin;
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -26,6 +27,8 @@ class AccountPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('account')
+            ->defaultThemeMode(ThemeMode::Light)
+            ->darkMode(false)
             ->path('account')
             ->colors([
                 'primary' => Color::Amber,
