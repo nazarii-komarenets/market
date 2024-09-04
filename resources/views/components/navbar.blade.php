@@ -1,5 +1,5 @@
-<div class="max-w-screen-xl items-center py-5 m-auto text-gray-800">
-    <header>
+<div class="max-w-screen-xl items-center py-5 mx-5 md:m-auto text-gray-800">
+    <header style="">
         <nav class="">
             <div class="container mx-auto md:flex items-center gap-6">
                 <!-- Logo -->

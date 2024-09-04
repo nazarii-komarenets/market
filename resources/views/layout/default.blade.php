@@ -21,7 +21,7 @@
     @vite('resources/css/app.css')
 </head>
 <body class="font-sans antialiased">
-    <div class="max-w-5xl mx-auto py-5">
+    <div class="max-w-5xl mx-auto py-5" style="padding: 0 10px 0 10px;">
         <x-navbar />
 
         @yield('content')

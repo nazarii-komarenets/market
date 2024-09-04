@@ -58,6 +58,7 @@ class ListProducts extends Component implements HasForms, HasTable
                 ])
             ])
             ->contentGrid([
+                'default' => 2,
                 'sm' => 2,
                 'md' => 3,
             ])
