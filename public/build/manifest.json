@@ -1,0 +1,19 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-nPUnbuRZ.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BmrwFrBv.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/components/navbar.js": {
+    "file": "assets/navbar-Cp4du1Oo.js",
+    "name": "navbar",
+    "src": "resources/js/components/navbar.js",
+    "isEntry": true
+  }
+}
