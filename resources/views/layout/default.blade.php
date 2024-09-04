@@ -20,7 +20,7 @@
     @filamentStyles
     @vite('resources/css/app.css')
 </head>
-<body class="font-sans antialiased dark:bg-black dark:text-white/50">
+<body class="font-sans antialiased">
     <div class="max-w-5xl mx-auto py-5">
         <x-navbar />
 
