@@ -98,7 +98,8 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('games')
+                    ->relationship('game', 'title')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

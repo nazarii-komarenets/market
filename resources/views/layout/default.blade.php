@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>WahaMarket</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -21,12 +21,13 @@
     @vite('resources/css/app.css')
 </head>
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-5xl mx-auto py-5">
         <x-navbar />
 
         @yield('content')
     </div>
 
+    @include('components.footer_bottom')
     @livewireScripts
     @filamentScripts
     @vite('resources/js/app.js')
