@@ -64,6 +64,7 @@ class ListProducts extends Component implements HasForms, HasTable
             ])
             ->filters([
                 SelectFilter::make('games')
+                    ->relationship('game', 'title')
             ])
             ->paginated([21, 36, 60]);
     }

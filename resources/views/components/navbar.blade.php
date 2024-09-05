@@ -20,8 +20,13 @@
                     </div>
                 </div>
                 <!-- Primary Navigation -->
-                <div class="hidden md:flex md:flex-row flex-col items-center justify-start md:space-x-1 navigation-menu pb-3 md:pb-0 navigation-menu">
-                    <a class="py-2 px-3 block hover:underline" href="/account/login">Увійти</a>
+                <div class="hidden md:flex md:flex-row w-full flex-col items-center justify-start md:justify-end md:space-x-1 navigation-menu pb-3 md:pb-0 navigation-menu">
+                    @auth
+                        <a class="py-2 px-3 block hover:underline" href="/account">{{ Auth::user()->name }}</a>
+                    @endauth
+                    @guest
+                        <a class="py-2 px-3 block hover:underline" href="/account/login">Увійти</a>
+                    @endguest
 {{--                    <!-- Dropdown Menu -->--}}
 {{--                    <div class="relative">--}}
 {{--                        <button class="dropdown-toggle py-2 px-3 hover:bg-gray-700 flex items-center gap-2 rounded">--}}
