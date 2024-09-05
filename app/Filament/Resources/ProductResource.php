@@ -23,27 +23,65 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->numeric()
-                    ->default(0)
-                    ->prefix('$'),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('quantity')
-                    ->required()
-                    ->numeric()
-                    ->default(1),
-                Forms\Components\Select::make('author_id')
-                    ->relationship('author', 'name')
-                    ->required(),
-                Forms\Components\Select::make('game_id')
-                    ->relationship('game', 'title')
-                    ->required(),
+                Forms\Components\Split::make([
+                    Forms\Components\Section::make([
+
+                        Forms\Components\TextInput::make('title')
+                            ->required()
+                            ->reactive()
+                            ->minLength(3)
+                            ->maxLength(255)
+                            ->rule('string')
+                            ->rule('regex:/^[a-zA-Z0-9\s\-]+$/')
+                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', static::generateUniqueSlug($state)))
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('slug')
+                            ->required()
+                            ->dehydrated()
+                            ->rule('alpha_dash')
+                            ->lazy()
+                            ->unique(ignoreRecord: true)
+                            ->maxLength(255),
+
+                        Forms\Components\FileUpload::make('images')
+                            ->multiple()
+                            ->image()
+                            ->reorderable()
+                            ->maxWidth('50%')
+                            ->maxFiles(5)
+                            ->maxSize(2048)
+                            ->disk('public')
+                            ->directory('products/images')
+                            ->label('Product Images'),
+
+                    ]),
+                    Forms\Components\Section::make([
+
+                        Forms\Components\Select::make('game_id')
+                            ->relationship('game', 'title')
+                            ->required(),
+
+                        Forms\Components\TextInput::make('price')
+                            ->required()
+                            ->numeric()
+                            ->minValue(0)
+                            ->default(0),
+
+                        Forms\Components\TextInput::make('quantity')
+                            ->required()
+                            ->numeric()
+                            ->minValue(1)
+                            ->default(1),
+
+                        Forms\Components\Select::make('author_id')
+                            ->relationship('author', 'name')
+                            ->required(),
+                    ])->grow(false),
+                ])->columnSpanFull(),
+                Forms\Components\Section::make([
+                    Forms\Components\RichEditor::make('description'),
+                ]),
             ]);
     }
 
@@ -54,7 +92,7 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->money()
+                    ->formatStateUsing(fn ($state) => number_format($state, 0) . ' грн.')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('quantity')
                     ->numeric()

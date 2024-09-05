@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ProductResource extends Resource
 {
@@ -33,10 +35,19 @@ class ProductResource extends Resource
 
                         Forms\Components\TextInput::make('title')
                             ->required()
+                            ->reactive()
+                            ->minLength(3)
+                            ->maxLength(255)
+                            ->rule('string')
+                            ->rule('regex:/^[a-zA-Z0-9\s\-]+$/')
+                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', static::generateUniqueSlug($state)))
                             ->maxLength(255),
 
                         Forms\Components\TextInput::make('slug')
                             ->required()
+                            ->dehydrated()
+                            ->rule('alpha_dash')
+                            ->lazy()
                             ->unique(ignoreRecord: true)
                             ->maxLength(255),
 
@@ -45,19 +56,24 @@ class ProductResource extends Resource
                             ->image()
                             ->reorderable()
                             ->maxWidth('50%')
+                            ->maxFiles(5)
                             ->disk('public')
+                            ->maxSize(2048)
                             ->directory('products/images')
                             ->label('Product Images'),
                     ]),
                     Forms\Components\Section::make([
+
                         Forms\Components\Select::make('game_id')
                             ->relationship('game', 'title')
                             ->required(),
+
                         Forms\Components\TextInput::make('price')
                             ->required()
                             ->numeric()
                             ->minValue(0)
                             ->default(0),
+
                         Forms\Components\TextInput::make('quantity')
                             ->required()
                             ->numeric()
@@ -80,7 +96,7 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->money()
+                    ->formatStateUsing(fn ($state) => number_format($state, 0) . ' грн.')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('quantity')
                     ->numeric()
@@ -125,5 +141,20 @@ class ProductResource extends Resource
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
+    }
+
+    public static function generateUniqueSlug($title, $modelId = null): string
+    {
+        $slug = Str::slug($title); // Create initial slug
+        $originalSlug = $slug; // Save original slug for later reference
+        $count = 1;
+
+        // Check if the slug exists in the database, and append a number if needed
+        while (DB::table('products')->where('slug', $slug)->exists()) {
+            $slug = "{$originalSlug}-{$count}";
+            $count++;
+        }
+
+        return $slug;
     }
 }
