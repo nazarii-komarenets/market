@@ -14,7 +14,7 @@ return [
     */
 
     'default' => env('QUEUE_CONNECTION', 'database'),
-
+    'use_queue_on_scan' => true,
     /*
     |--------------------------------------------------------------------------
     | Queue Connections
