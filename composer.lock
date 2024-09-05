@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68c4c64a84d87d601f08a162e8e878ac",
+    "content-hash": "004d119e6239028cbf9ff7a2fc532bc3",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -7250,6 +7250,90 @@
                 }
             ],
             "time": "2024-07-26T12:41:01+00:00"
+        },
+        {
+            "name": "tapp/filament-value-range-filter",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TappNetwork/filament-value-range-filter.git",
+                "reference": "2e64570de3b6992860950c469aeea10375fd8d39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TappNetwork/filament-value-range-filter/zipball/2e64570de3b6992860950c469aeea10375fd8d39",
+                "reference": "2e64570de3b6992860950c469aeea10375fd8d39",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0-stable",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.9",
+                "laravel/pint": "^1.14",
+                "nunomaduro/collision": "^8.1.1||^7.10.0",
+                "orchestra/testbench": "^9.0.0||^8.22.0",
+                "pestphp/pest": "^2.34",
+                "pestphp/pest-plugin-arch": "^2.7",
+                "pestphp/pest-plugin-laravel": "^2.3",
+                "phpstan/extension-installer": "^1.3",
+                "phpstan/phpstan-deprecation-rules": "^1.1",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "spatie/laravel-ray": "^1.35"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Tapp\\FilamentValueRangeFilter\\FilamentValueRangeFilterServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentValueRangeFilter": "Tapp\\FilamentValueRangeFilter\\Facades\\FilamentValueRangeFilter"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tapp\\FilamentValueRangeFilter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tapp Network",
+                    "email": "steve@tappnetwork.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Tapp Network",
+                    "email": "andreia.bohner@tappnetwork.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Filament country code field.",
+            "homepage": "https://github.com/TappNetwork/filament-value-range-filter",
+            "keywords": [
+                "filament",
+                "filter",
+                "laravel",
+                "tapp network",
+                "value range"
+            ],
+            "support": {
+                "issues": "https://github.com/TappNetwork/filament-value-range-filter/issues",
+                "source": "https://github.com/TappNetwork/filament-value-range-filter"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/TappNetwork",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-08-05T18:25:13+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

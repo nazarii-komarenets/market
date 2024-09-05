@@ -17,6 +17,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Livewire\Component;
+use Tapp\FilamentValueRangeFilter\Filters\ValueRangeFilter;
 
 class ListProducts extends Component implements HasForms, HasTable
 {
@@ -64,7 +65,8 @@ class ListProducts extends Component implements HasForms, HasTable
             ])
             ->filters([
                 SelectFilter::make('games')
-                    ->relationship('game', 'title')
+                    ->relationship('game', 'title'),
+                ValueRangeFilter::make('price'),
             ])
             ->paginated([21, 36, 60]);
     }

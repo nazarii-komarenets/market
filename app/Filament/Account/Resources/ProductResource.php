@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Tapp\FilamentValueRangeFilter\Filters\ValueRangeFilter;
 
 class ProductResource extends Resource
 {
@@ -115,7 +116,8 @@ class ProductResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('games')
-                    ->relationship('game', 'title')
+                    ->relationship('game', 'title'),
+                ValueRangeFilter::make('price'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

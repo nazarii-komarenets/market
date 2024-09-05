@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Tapp\FilamentValueRangeFilter\Filters\ValueRangeFilter;
 
 class ProductResource extends Resource
 {
@@ -113,7 +114,9 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('games')
+                    ->relationship('game', 'title'),
+                ValueRangeFilter::make('price'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
