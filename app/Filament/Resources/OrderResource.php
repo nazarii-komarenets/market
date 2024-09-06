@@ -53,6 +53,7 @@ class OrderResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('author.name')
+                    ->searchable()
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('product.title')
