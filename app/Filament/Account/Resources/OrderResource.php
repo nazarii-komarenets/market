@@ -18,6 +18,10 @@ class OrderResource extends Resource
     protected static ?string $model = Order::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'Замовлення';
+    protected static ?string $pluralLabel = 'Замовлення';
+    protected static ?string $pluralModelLabel = 'Замовлення';
+    protected static ?string $navigationLabel = 'Замовлення';
 
     public static function getEloquentQuery(): Builder
     {

@@ -21,6 +21,10 @@ class ProductResource extends Resource
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'Товар';
+    protected static ?string $pluralLabel = 'Товари';
+    protected static ?string $pluralModelLabel = 'Товари';
+    protected static ?string $navigationLabel = 'Товари';
 
     public static function getEloquentQuery(): Builder
     {

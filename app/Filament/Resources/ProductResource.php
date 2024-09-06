@@ -17,8 +17,11 @@ use Tapp\FilamentValueRangeFilter\Filters\ValueRangeFilter;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'Товари';
+    protected static ?string $pluralLabel = 'Товари';
+    protected static ?string $pluralModelLabel = 'ТОвари';
+    protected static ?string $navigationLabel = 'Товари';
 
     public static function form(Form $form): Form
     {
