@@ -97,6 +97,8 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->limit(60)
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->formatStateUsing(fn ($state) => number_format($state, 0) . ' грн.')
