@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Register;
 use App\Http\Middleware\IsAdmin;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
@@ -34,7 +35,7 @@ class AccountPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             ->login()
-            ->registration()
+            ->registration(Register::class)
             ->discoverResources(in: app_path('Filament/Account/Resources'), for: 'App\\Filament\\Account\\Resources')
             ->discoverPages(in: app_path('Filament/Account/Pages'), for: 'App\\Filament\\Account\\Pages')
             ->pages([
