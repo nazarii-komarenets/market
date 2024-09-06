@@ -73,12 +73,14 @@ class ProductResource extends Resource
                             ->required()
                             ->numeric()
                             ->minValue(0)
+                            ->maxValue(200000)
                             ->default(0),
 
                         Forms\Components\TextInput::make('quantity')
                             ->required()
                             ->numeric()
                             ->minValue(1)
+                            ->maxValue(100)
                             ->default(1),
                     ])->grow(false),
                 ])->columnSpanFull(),
