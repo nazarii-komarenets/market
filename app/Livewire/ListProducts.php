@@ -49,6 +49,8 @@ class ListProducts extends Component implements HasForms, HasTable
                             ->badge()
                             ->numeric(),
                         TextColumn::make('title')
+                            ->limit(60)
+                            ->wrap()
                             ->size('xl')
                             ->extraAttributes(['class' => 'bold'])
                             ->searchable(),
