@@ -20,7 +20,7 @@ class ProductResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $modelLabel = 'Товари';
     protected static ?string $pluralLabel = 'Товари';
-    protected static ?string $pluralModelLabel = 'ТОвари';
+    protected static ?string $pluralModelLabel = 'Товари';
     protected static ?string $navigationLabel = 'Товари';
 
     public static function form(Form $form): Form
@@ -36,7 +36,8 @@ class ProductResource extends Resource
                             ->minLength(3)
                             ->maxLength(255)
                             ->rule('string')
-                            ->rule('regex:/^[a-zA-Z0-9\s\-]+$/')
+                            ->rule('regex:/^[\p{L}\p{N}\s\-]+$/u')
+                            ->debounce(1500)
                             ->afterStateUpdated(fn ($state, callable $set) => $set('slug', static::generateUniqueSlug($state)))
                             ->maxLength(255),
 

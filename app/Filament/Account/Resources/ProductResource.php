@@ -44,7 +44,8 @@ class ProductResource extends Resource
                             ->minLength(3)
                             ->maxLength(255)
                             ->rule('string')
-                            ->rule('regex:/^[a-zA-Z0-9\s\-]+$/')
+                            ->rule('regex:/^[\p{L}\p{N}\s\-]+$/u')
+                            ->debounce(1500)
                             ->afterStateUpdated(fn ($state, callable $set) => $set('slug', static::generateUniqueSlug($state)))
                             ->maxLength(255),
 
