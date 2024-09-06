@@ -5,19 +5,19 @@ namespace App\Filament\Account\Resources;
 use App\Filament\Account\Resources\ProductResource\Pages;
 use App\Filament\Account\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
+use App\Traits\generateUniqueSlug;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Tapp\FilamentValueRangeFilter\Filters\ValueRangeFilter;
 
 class ProductResource extends Resource
 {
+    use generateUniqueSlug;
+
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -153,22 +153,5 @@ class ProductResource extends Resource
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
-    }
-
-    public static function generateUniqueSlug($title, $modelId = null): string
-    {
-        $slug = Str::slug($title); // Create initial slug
-        $originalSlug = $slug; // Save original slug for later reference
-        $count = 1;
-
-        // Check if the slug exists in the database, and append a number if needed
-        while (
-            DB::table('products')->where('slug', $slug)->exists()
-        ) {
-            $slug = "{$originalSlug}-{$count}";
-            $count++;
-        }
-
-        return $slug;
     }
 }
