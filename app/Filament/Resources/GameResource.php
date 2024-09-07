@@ -34,7 +34,7 @@ class GameResource extends Resource
                     ->rule('string')
                     ->rule('regex:/^[\p{L}\p{N}\s\-]+$/u')
                     ->debounce(1500)
-                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', static::generateUniqueSlug($state))),
+                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', static::generateUniqueSlug($state, 'games'))),
 
                 Forms\Components\TextInput::make('slug')
                     ->required()
