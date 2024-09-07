@@ -11,11 +11,18 @@ class Game extends Model
 
     protected $fillable = [
         'title',
+        'slug',
     ];
 
     protected $casts = [
         'title' => 'string',
+        'slug' => 'string',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

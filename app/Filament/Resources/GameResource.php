@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\GameResource\Pages;
 use App\Filament\Resources\GameResource\RelationManagers;
 use App\Models\Game;
+use App\Traits\generateUniqueSlug;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GameResource extends Resource
 {
+    use generateUniqueSlug;
+
     protected static ?string $model = Game::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -25,7 +28,22 @@ class GameResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
+                    ->reactive()
+                    ->minLength(3)
+                    ->maxLength(255)
+                    ->rule('string')
+                    ->rule('regex:/^[\p{L}\p{N}\s\-]+$/u')
+                    ->debounce(1500)
+                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', static::generateUniqueSlug($state))),
+
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->dehydrated()
+                    ->rule('alpha_dash')
+                    ->lazy()
+                    ->unique(ignoreRecord: true)
                     ->maxLength(255),
+
             ]);
     }
 
@@ -34,6 +52,8 @@ class GameResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
