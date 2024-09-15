@@ -35,15 +35,19 @@ class ListProducts extends Component implements HasForms, HasTable
             ->query($this->query())
             ->columns([
                 Stack::make([
-                    ImageColumn::make('images.0')
-                        ->defaultImageUrl('/images/product/default.png')
-                        ->width('100%')
-                        ->height('auto')
-                        ->extraImgAttributes([
-                            'class' => 'rounded mb-2',
-                            'style' => 'height: 100%; max-height: 290px;aspect-ratio: 1;'
-                        ])
-                        ->label('Image'),
+                    Stack::make([
+                        ImageColumn::make('images.0')
+                            ->defaultImageUrl('/images/product/default.png')
+                            ->width('100%')
+                            ->height('auto')
+                            ->extraImgAttributes([
+                                'class' => 'rounded',
+                                'style' => 'height: 100%; max-height: 290px;'
+                            ])
+                            ->label('Image'),
+                    ])->extraAttributes([
+                            'class' => 'product__main_image_block'
+                        ]),
                     Stack::make([
                         TextColumn::make('game.title')
                             ->badge()
@@ -69,7 +73,7 @@ class ListProducts extends Component implements HasForms, HasTable
                 SelectFilter::make('games')
                     ->relationship('game', 'title'),
                 ValueRangeFilter::make('price'),
-            ])
+            ])->filtersLayout(FiltersLayout::Modal)
             ->paginated([21, 36, 60]);
     }
     public function render(): \Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
