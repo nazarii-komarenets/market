@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use Filament\Infolists\Components\Group;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -32,11 +33,16 @@ class ViewProduct extends Component implements HasForms, HasInfolists
             ->record($this->product)
             ->schema([
                 Split::make([
-                    Section::make([
+                    Group::make([
                         ImageEntry::make('images')
-                            ->width('full'),
-                        TextEntry::make('title'),
-                        TextEntry::make('description'),
+                            ->label('')
+                            ->extraImgAttributes([
+                                'data-fancybox' => "images",
+                            ]),
+                        Section::make([
+                            TextEntry::make('title'),
+                            TextEntry::make('description'),
+                        ]),
                     ]),
                     Section::make([
                         TextEntry::make('price'),
