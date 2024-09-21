@@ -6,4 +6,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/{account}/products/{slug}', \App\Http\Controllers\OrganizationProduct::class);
+Route::get('/products/{product}', function (\App\Models\Product $product) {
+    return view('pages.product', ['product' => $product]);
+})->name('product.view');

@@ -69,6 +69,7 @@ class ListProducts extends Component implements HasForms, HasTable
                 'sm' => 2,
                 'md' => 3,
             ])
+            ->recordUrl(fn ($record) => route('product.view', $record->slug))
             ->filters([
                 SelectFilter::make('games')
                     ->relationship('game', 'title'),
