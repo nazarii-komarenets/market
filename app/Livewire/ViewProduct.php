@@ -37,17 +37,30 @@ class ViewProduct extends Component implements HasForms, HasInfolists
                         ImageEntry::make('images')
                             ->label('')
                             ->extraImgAttributes([
+                                'class' => 'rounded',
                                 'data-fancybox' => "images",
                             ]),
                         Section::make([
+                            TextEntry::make('game.title')
+                                ->label('')
+                                ->badge(),
                             TextEntry::make('title'),
                             TextEntry::make('description'),
                         ]),
+                        TextEntry::make('created_at')
+                            ->dateTime('H:i M d, Y')
+                            ->label('Створено: '),
                     ]),
-                    Section::make([
-                        TextEntry::make('price'),
+                    Group::make([
+                        Section::make([
+                            TextEntry::make('author.name')
+                                ->label(''),
+                        ]),
+                        Section::make([
+                            TextEntry::make('price'),
+                        ]),
                     ])->grow(false),
-                ])
+                ])->from('md')
             ]);
     }
 
