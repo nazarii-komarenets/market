@@ -3,6 +3,10 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use Filament\Actions\Action;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Infolists\Components\Actions;
 use Filament\Infolists\Components\Group;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Split;
@@ -13,10 +17,12 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Concerns\InteractsWithInfolists;
 use Filament\Infolists\Contracts\HasInfolists;
 use Filament\Infolists\Infolist;
+use Filament\Support\Enums\VerticalAlignment;
 use Livewire\Component;
 
-class ViewProduct extends Component implements HasForms, HasInfolists
+class ViewProduct extends Component implements HasForms, HasInfolists, HasActions
 {
+    use InteractsWithActions;
     use InteractsWithInfolists;
     use InteractsWithForms;
 
@@ -57,7 +63,19 @@ class ViewProduct extends Component implements HasForms, HasInfolists
                                 ->label(''),
                         ]),
                         Section::make([
-                            TextEntry::make('price'),
+                            Split::make([
+                                TextEntry::make('price')
+                                    ->inlineLabel()
+                                    ->suffix(' грн.')
+                                    ->label('Ціна')
+                                    ->grow(false),
+                                Actions::make([
+                                    Actions\Action::make('buy_1')
+                                        ->openUrlInNewTab()
+                                        ->url(fn ($record) => route('checkout.product', $record->slug))
+                                        ->label('Купити'),
+                                ]),
+                            ])->verticalAlignment(VerticalAlignment::Center)
                         ]),
                     ])->grow(false),
                 ])->from('md')
