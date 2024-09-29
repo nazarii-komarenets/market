@@ -18,6 +18,7 @@ use Filament\Infolists\Concerns\InteractsWithInfolists;
 use Filament\Infolists\Contracts\HasInfolists;
 use Filament\Infolists\Infolist;
 use Filament\Support\Enums\VerticalAlignment;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;
 
 class ViewProduct extends Component implements HasForms, HasInfolists, HasActions
@@ -27,10 +28,17 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
     use InteractsWithForms;
 
     public Product $product;
+    public int $userOrderCount;
 
-    public function mount(Product $product): void
+    public static function query(): Builder
+    {
+        return parent::query()->withCount('orders');
+    }
+
+    public function mount(Product $product, int $userOrderCount): void
     {
         $this->product = $product;
+        $this->userOrderCount = $userOrderCount;
     }
 
     public function productInfolist(Infolist $infolist): Infolist
@@ -43,7 +51,7 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                         ImageEntry::make('images')
                             ->label('')
                             ->extraImgAttributes([
-                                'class' => 'rounded',
+                                'class' => 'rounded hover:cursor-pointer',
                                 'data-fancybox' => "images",
                             ]),
                         Section::make([
@@ -61,6 +69,10 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                         Section::make([
                             TextEntry::make('author.name')
                                 ->label(''),
+                            TextEntry::make('author.orders_count')
+                                ->getStateUsing(fn () => $this->userOrderCount)
+                                ->inlineLabel()
+                                ->label('Замовлень: '),
                         ]),
                         Section::make([
                             Split::make([
@@ -74,7 +86,7 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                                         ->openUrlInNewTab()
                                         ->url(fn ($record) => route('checkout.product', $record->slug))
                                         ->label('Купити'),
-                                ]),
+                                ])->alignEnd(),
                             ])->verticalAlignment(VerticalAlignment::Center)
                         ]),
                     ])->grow(false),

@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property User $author
+ */
 class Order extends Model
 {
     use HasFactory;
@@ -34,7 +37,7 @@ class Order extends Model
 
     public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo

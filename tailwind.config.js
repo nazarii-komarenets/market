@@ -5,8 +5,10 @@ export default {
     content: [
         './src/**/*.{html,js}',
         './app/Filament/**/*.php',
+        './app/Livewire/**/*.php',
         './resources/views/filament/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
+        './resources/**/*.blade.php',
         './resources/**/*.blade.php',
     ],
 }
