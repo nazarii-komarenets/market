@@ -62,7 +62,8 @@ class CheckoutProduct extends Component implements HasForms, HasInfolists, HasAc
                     ->required(),
                 Hidden::make('product_id')
                     ->required(),
-                Textarea::make('note'),
+                Textarea::make('note')
+                    ->required(),
             ])
             ->statePath('data');
     }
