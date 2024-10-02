@@ -21,11 +21,18 @@
                 </div>
                 <!-- Primary Navigation -->
                 <div class="hidden md:flex md:flex-row w-full flex-col items-center justify-start md:justify-end md:space-x-1 navigation-menu pb-3 md:pb-0 navigation-menu">
+                    <a class="py-2 px-3 block hover:underline" href="{{ route('product.list') }}">Товари</a>
+                    <a class="py-2 px-3 block hover:underline" href="{{ route('contact-us') }}">Контакти</a>
+
                     @auth
-                        <a class="py-2 px-3 block hover:underline" href="/account">{{ Auth::user()->name }}</a>
+                        <a class="py-2 px-3 block hover:underline" href="/account">
+                            <x-filament::badge :color="'info'">{{ Auth::user()->name }}</x-filament::badge>
+                        </a>
                     @endauth
                     @guest
-                        <a class="py-2 px-3 block hover:underline" href="/account/login">Увійти</a>
+                        <a class="py-2 px-3 block hover:underline" href="/account/login">
+                            <x-filament::button>Увійти</x-filament::button>
+                        </a>
                     @endguest
 {{--                    <!-- Dropdown Menu -->--}}
 {{--                    <div class="relative">--}}

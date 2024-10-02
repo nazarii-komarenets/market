@@ -8,12 +8,15 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     protected UserRepository $userRepository;
-    protected Product $product;
 
-    public function __construct(Product $product, UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->product = $product;
+    }
+
+    public function index()
+    {
+        return view('pages.products');
     }
 
     public function show(Product $product)
@@ -24,10 +27,5 @@ class ProductController extends Controller
             'product' => $product,
             'userOrderCount' => $userOrderCount,
         ]);
-    }
-
-    public function getProduct()
-    {
-        return $this->product;
     }
 }

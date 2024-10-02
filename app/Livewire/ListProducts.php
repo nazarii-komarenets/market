@@ -64,13 +64,13 @@ class ListProducts extends Component implements HasForms, HasTable
             ->contentGrid([
                 'default' => 2,
                 'sm' => 2,
-                'md' => 3,
+                'md' => 4,
             ])
             ->recordUrl(fn ($record) => route('product.view', $record->slug))
             ->filters([
                 SelectFilter::make('games')
+                    ->label('Гра')
                     ->relationship('game', 'title'),
-                ValueRangeFilter::make('price'),
             ])->filtersLayout(FiltersLayout::Modal)
             ->paginated([21, 36, 60]);
     }
