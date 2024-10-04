@@ -2,6 +2,10 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Account\Resources\OrderResource\Widgets\OrderOverview;
+use App\Filament\Account\Resources\ProductResource\Widgets\ProductOverview;
+use App\Filament\Account\Widgets\ConnectTelegram;
+use App\Filament\Account\Widgets\WelcomePage;
 use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Auth\Register;
@@ -46,8 +50,10 @@ class AccountPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Account/Widgets'), for: 'App\\Filament\\Account\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                WelcomePage::class,
+                ConnectTelegram::class,
+                ProductOverview::class,
+                OrderOverview::class,
             ])
             ->middleware([
                 EncryptCookies::class,

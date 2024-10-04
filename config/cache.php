@@ -90,6 +90,13 @@ return [
             'driver' => 'octane',
         ],
 
+        'telegram' => [
+            'driver' => 'database',
+            'table' => 'telegram_cache',
+            'connection' => null,
+            'lock_connection' => null,
+        ],
+
     ],
 
     /*

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Http\Controllers\RequestNotificationController;
 use App\Models\Request;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
@@ -28,7 +29,7 @@ class ContactUs extends Component implements HasForms
             ->schema([
                 Section::make([
                     TextInput::make('contacts')
-                        ->label('Контакти')
+                        ->label('Залишіть свої контакти')
                         ->required(),
                     Textarea::make('note')
                         ->label('Повідомлення')
@@ -40,7 +41,10 @@ class ContactUs extends Component implements HasForms
 
     public function create(): void
     {
-        Request::create($this->form->getState());
+        $request = Request::create($this->form->getState());
+
+        app(RequestNotificationController::class)
+            ->send('Контакти: *'. $request->contacts .'* | Повідомлення: '. $request->note);
 
         $this->redirect(route('thank-you'));
     }

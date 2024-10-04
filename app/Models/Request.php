@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\TelegramNotificationController;
+use App\Notifications\TelegramNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Psy\Util\Str;
 
 class Request extends Model
 {

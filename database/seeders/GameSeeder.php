@@ -12,10 +12,17 @@ class GameSeeder extends Seeder
      */
     public function run(): void
     {
-        $games = ['Warhammer 40k', 'Kill Team', 'Warhammer Aos'];
+        $games = [
+            ['title' => 'Warhammer 40k', 'slug' => 'warhammer-40k'],
+            ['title' => 'Kill Team', 'slug' => 'kill-team'],
+            ['title' => 'Warhammer Aos', 'slug' => 'warhammer-aos'],
+        ];
 
         foreach ($games as $game) {
-            Game::factory(['title' => $game])->create();
+            Game::factory([
+                'title' => $game['title'],
+                'slug' => $game['slug'],
+            ])->create();
         }
     }
 }

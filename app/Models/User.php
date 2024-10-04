@@ -7,12 +7,13 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -62,5 +63,23 @@ class User extends Authenticatable implements FilamentUser
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class, 'author_id');
+    }
+
+    protected static function booted(): void
+    {
+        static::deleting(function ($user) {
+            if ($user->isForceDeleting()) {
+                // Force delete related products if user is permanently deleted
+                $user->products()->forceDelete();
+            } else {
+                // Soft delete related products
+                $user->products()->delete();
+            }
+        });
+
+        static::restoring(function ($user) {
+            // Restore soft-deleted products when the user is restored
+            $user->products()->withTrashed()->restore();
+        });
     }
 }

@@ -23,4 +23,9 @@ class UserRepository
     {
         return $this->user->withCount('orders')->find($userId)->orders_count;
     }
+
+    public function getProductCount(): int
+    {
+        return $this->user->products()->count();
+    }
 }

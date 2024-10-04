@@ -20,13 +20,9 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->integer('quantity')->default(1);
 
-            $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('game_id');
 
-            $table->foreign('author_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->foreignId('author_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->foreign('game_id')
                 ->references('id')
