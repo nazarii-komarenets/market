@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\ProductRepository;
 use App\Http\Repositories\UserRepository;
-use App\Models\Product;
+use App\Models\User;
 use App\Notifications\CheckoutNotification;
-use Illuminate\Http\Request;
 
 class CheckoutNotificationController extends Controller
 {
@@ -23,9 +22,11 @@ class CheckoutNotificationController extends Controller
 
     public function send(array $order, int $author_id): void
     {
-        $user = $this->userRepository->getUserByAuthorId($author_id);
+        $user = User::where('id', $author_id)->first();
         $order['product'] = $this->productRepository->getProductById($order['product_id']);
 
-        $user->notify(new CheckoutNotification($order));
+        if ($user->telegram_chat_id) {
+            $user->notify(new CheckoutNotification($order));
+        }
     }
 }
