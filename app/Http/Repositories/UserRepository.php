@@ -24,13 +24,13 @@ class UserRepository
         return $this->user->withCount('orders')->find($userId)->orders_count;
     }
 
-    public function getProductCount(): int
+    public function getProductCount(int $userId): int
     {
-        return $this->user->products()->count();
+        return $this->user->find($userId)->products()->count();
     }
 
     public function getUserByAuthorId(int $author_id): User
     {
-        return User::find($author_id)->first();
+        return $this->user->find($author_id)->first();
     }
 }

@@ -12,7 +12,7 @@ class ProductOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Всього товарів',  app(UserRepository::class)->getProductCount()),
+            Stat::make('Всього товарів',  app(UserRepository::class)->getProductCount(Auth::id())),
         ];
     }
 }
