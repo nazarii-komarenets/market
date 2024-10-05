@@ -27,6 +27,7 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_admin'),
+                Forms\Components\TextInput::make('telegram_chat_id'),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
