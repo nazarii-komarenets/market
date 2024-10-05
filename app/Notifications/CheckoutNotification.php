@@ -43,13 +43,13 @@ class CheckoutNotification extends Notification
             ->content('У вас нове замовлення!')
             ->line(' ')
             ->line('---')
-            ->line($this->order['product']['title'])
-            ->line($this->order['product']['price'])
+            ->line('Товар: ' . $this->order['product']['title'])
+            ->line('Ціна: ' . $this->order['product']['price'] . ' грн.')
             ->line('---')
-            ->line($this->order['client_phone'])
-            ->line($this->order['client_address'])
-            ->line($this->order['note'])
-            ->button('Відкрити сайт', 'https://waha-market.online/account/orders');
+            ->line('Телефон: ' . $this->order['client_phone'])
+            ->line('Адрес: ' . $this->order['client_address'])
+            ->line('Примітка: ' . $this->order['note'])
+            ->button('Відкрити замовлення', 'https://waha-market.online/account/orders');
     }
 
     /**
