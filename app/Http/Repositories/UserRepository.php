@@ -28,4 +28,9 @@ class UserRepository
     {
         return $this->user->products()->count();
     }
+
+    public function getUserByAuthorId(int $author_id): User
+    {
+        return User::find($author_id)->first();
+    }
 }

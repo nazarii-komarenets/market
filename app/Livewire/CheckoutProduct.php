@@ -2,9 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Http\Controllers\CheckoutNotificationController;
+use App\Http\Repositories\UserRepository;
 use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\Product;
+use App\Models\User;
+use App\Notifications\TelegramNotification;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Actions\CreateAction;
@@ -70,7 +74,12 @@ class CheckoutProduct extends Component implements HasForms, HasInfolists, HasAc
 
     public function create(): void
     {
-        Order::create($this->form->getState());
+        $order = $this->form->getState();
+        Order::create($order);
+
+        app(CheckoutNotificationController::class)
+            ->send($order, $order['author_id']);
+
 
         $this->redirect(route('thank-you'));
     }
