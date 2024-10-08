@@ -58,8 +58,11 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                             TextEntry::make('game.title')
                                 ->label('')
                                 ->badge(),
-                            TextEntry::make('title'),
-                            TextEntry::make('description'),
+                            TextEntry::make('title')
+                                ->label(''),
+                            TextEntry::make('description')
+                                ->html()
+                                ->label('Опис'),
                         ]),
                         TextEntry::make('created_at')
                             ->dateTime('H:i M d, Y')
@@ -89,7 +92,9 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                                 ])->alignEnd(),
                             ])->verticalAlignment(VerticalAlignment::Center)
                         ]),
-                    ])->grow(false),
+                    ])
+                        ->extraAttributes(['class' => 'mt-6'])
+                        ->grow(false),
                 ])->from('md')
             ]);
     }
