@@ -8,6 +8,6 @@ class ProductRepository
 {
     public function getProductById(int $id)
     {
-        return Product::find($id)->first();
+        return Product::where('id', $id)->first();
     }
 }

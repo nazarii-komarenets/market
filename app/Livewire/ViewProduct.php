@@ -78,23 +78,24 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                                 ->label('Замовлень: '),
                         ]),
                         Section::make([
-                            Split::make([
-                                TextEntry::make('price')
-                                    ->inlineLabel()
-                                    ->suffix(' грн.')
-                                    ->label('Ціна')
-                                    ->grow(false),
+                                Group::make(['info'])
+                                    ->schema([
+                                        TextEntry::make('quantity')
+                                            ->inlineLabel()
+                                            ->label('Кількість'),
+                                        TextEntry::make('price')
+                                            ->inlineLabel()
+                                            ->suffix(' грн.')
+                                            ->label('Ціна'),
+                                    ])->grow(false),
                                 Actions::make([
-                                    Actions\Action::make('buy_1')
+                                    Actions\Action::make('buy')
                                         ->openUrlInNewTab()
                                         ->url(fn ($record) => route('checkout.product', $record->slug))
                                         ->label('Купити'),
-                                ])->alignEnd(),
-                            ])->verticalAlignment(VerticalAlignment::Center)
+                                ]),
                         ]),
-                    ])
-                        ->extraAttributes(['class' => 'mt-6'])
-                        ->grow(false),
+                    ])->extraAttributes(['class' => 'mt-6'])->grow(false),
                 ])->from('md')
             ]);
     }
