@@ -29,10 +29,10 @@ class ContactUs extends Component implements HasForms
             ->schema([
                 Section::make([
                     TextInput::make('contacts')
-                        ->label('Залишіть свої контакти')
+                        ->label(__('Contacts_Form'))
                         ->required(),
                     Textarea::make('note')
-                        ->label('Повідомлення')
+                        ->label(__('Note'))
                         ->required(),
                 ])
             ])
@@ -44,7 +44,7 @@ class ContactUs extends Component implements HasForms
         $request = Request::create($this->form->getState());
 
         app(RequestNotificationController::class)
-            ->send('Контакти: *'. $request->contacts .'* | Повідомлення: '. $request->note);
+            ->send(__('Contacts').': *'. $request->contacts .'* | '.__('Note').': '. $request->note);
 
         $this->redirect(route('thank-you'));
     }

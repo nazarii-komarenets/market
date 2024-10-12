@@ -1,12 +1,12 @@
 <div class="block md:flex justify-between">
     <div class="w-full md:w-1/2">
-        <x-filament::section.heading class="mb-10">Форма зворотнього зв`язку</x-filament::section.heading>
+        <x-filament::section.heading class="mb-10">{{ __('Contacts_Form_Title') }}</x-filament::section.heading>
 
         <form wire:submit="create" class="mb-10">
             {{ $this->form }}
 
             <x-filament::button type="submit" class="mt-5">
-                Відправити
+                {{ __('Send') }}
             </x-filament::button>
         </form>
 

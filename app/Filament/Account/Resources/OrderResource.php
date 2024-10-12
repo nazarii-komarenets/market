@@ -36,19 +36,23 @@ class OrderResource extends Resource
                     ->relationship('status', 'name')
                     ->required(),
                 Forms\Components\Select::make('product_id')
+                    ->label(__('Product'))
                     ->relationship('product', 'title')
                     ->disabled(),
                 Forms\Components\TextInput::make('client_phone')
+                    ->label(__('Client_Phone'))
                     ->tel()
                     ->disabled()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('client_address')
+                    ->label(__('Client_Address'))
                     ->required()
                     ->disabled()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('note')
                     ->required()
                     ->disabled()
+                    ->label(__('Note'))
                     ->columnSpanFull(),
             ]);
     }
