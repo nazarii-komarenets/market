@@ -29,8 +29,8 @@ class UserRepository
         return $this->user->find($userId)->products()->count();
     }
 
-    public function getUserByAuthorId(int $author_id): User
+    public function getUserByAuthorId(int $id): User
     {
-        return $this->user->find($author_id)->first();
+        return $this->user->where('id', $id)->get();
     }
 }

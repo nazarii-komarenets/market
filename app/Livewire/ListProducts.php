@@ -61,6 +61,7 @@ class ListProducts extends Component implements HasForms, HasTable
                     ])
                 ])
             ])
+            ->defaultSort('created_at', 'desc')
             ->contentGrid([
                 'default' => 2,
                 'sm' => 2,
