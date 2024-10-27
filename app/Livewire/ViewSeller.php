@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Seller;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Infolists\Components\Fieldset;
 use Filament\Infolists\Components\TextEntry;
 use Livewire\Component;
 use Filament\Infolists\Infolist;
@@ -28,7 +29,12 @@ class ViewSeller extends Component implements HasInfolists, HasForms
         return $infolist
             ->record($this->seller)
             ->schema([
-                TextEntry::make('name'),
+                Fieldset::make('Автор')->schema([
+                    TextEntry::make('name'),
+                    TextEntry::make('email'),
+                    TextEntry::make('order_count')
+                        ->label(__('Кількість замовлень')),
+                ])
             ]);
     }
 

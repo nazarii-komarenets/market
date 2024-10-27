@@ -58,6 +58,7 @@ class ListProducts extends Component implements HasForms, HasTable
                             ->extraAttributes(['class' => 'bold'])
                             ->searchable(),
                         TextColumn::make('price')
+                            ->label('Ціна')
                             ->formatStateUsing(fn ($state) => number_format($state, 0, '.', ' ') . ' грн.')
                             ->sortable(),
                     ])
