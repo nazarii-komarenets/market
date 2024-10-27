@@ -21,6 +21,8 @@ class ListProducts extends Component implements HasForms, HasTable
     use InteractsWithTable;
     use InteractsWithForms;
 
+    public ?int $filterBySellerId = null;
+
     public function query(): \Illuminate\Database\Eloquent\Builder
     {
         return Product::query();
@@ -72,6 +74,10 @@ class ListProducts extends Component implements HasForms, HasTable
                 SelectFilter::make('games')
                     ->label('Гра')
                     ->relationship('game', 'title'),
+                SelectFilter::make('author')
+                    ->label(__('Автор'))
+                    ->default(fn() => $this->filterBySellerId ?: null)
+                    ->relationship('author', 'name'),
             ])->filtersLayout(FiltersLayout::Modal)
             ->paginated([21, 36, 60]);
     }

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use App\Models\Seller;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -71,6 +72,7 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                     Group::make([
                         Section::make([
                             TextEntry::make('author.name')
+                                ->url(fn ($record) => route('seller.show', $record->author->id), true)
                                 ->label(''),
                             TextEntry::make('author.orders_count')
                                 ->getStateUsing(fn () => $this->userOrderCount)

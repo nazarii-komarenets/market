@@ -10,4 +10,9 @@ class ProductRepository
     {
         return Product::where('id', $id)->first();
     }
+
+    public function getProductsBySeller(int $sellerId)
+    {
+        return Product::where('author_id', $sellerId)->all();
+    }
 }
