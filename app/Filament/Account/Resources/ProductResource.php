@@ -46,7 +46,9 @@ class ProductResource extends Resource
                             ->rule('string')
                             ->rule('regex:/^[\p{L}\p{N}\s\-]+$/u')
                             ->debounce(1500)
-                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', static::generateUniqueSlug($state)))
+                            ->afterStateUpdated(function ($state, callable $set, $get) {
+                                $set('slug', static::generateUniqueSlug($state, 'products', $get('id')));
+                            })
                             ->maxLength(255),
 
                         Forms\Components\TextInput::make('slug')
