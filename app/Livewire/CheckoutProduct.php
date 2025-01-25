@@ -93,7 +93,7 @@ class CheckoutProduct extends Component implements HasForms, HasInfolists, HasAc
                     Split::make([
                         Group::make([
                             ImageEntry::make('images')
-                                ->label('')
+                                ->label(false)
                                 ->stacked()
                                 ->extraImgAttributes([
                                     'class' => 'rounded',
@@ -101,11 +101,11 @@ class CheckoutProduct extends Component implements HasForms, HasInfolists, HasAc
                                 ]),
 
                             TextEntry::make('game.title')
-                                ->label('')
+                                ->label(false)
                                 ->badge(),
 
                             TextEntry::make('title')
-                                ->label(''),
+                                ->label(false),
 
                             TextEntry::make('price')
                                 ->inlineLabel()

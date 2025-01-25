@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use Exception;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Columns\ImageColumn;
@@ -28,6 +29,9 @@ class ListProducts extends Component implements HasForms, HasTable
         return Product::query();
     }
 
+    /**
+     * @throws Exception
+     */
     public function table(Table $table): Table
     {
         return $table
@@ -79,7 +83,8 @@ class ListProducts extends Component implements HasForms, HasTable
                     ->label(__('Автор'))
                     ->default(fn() => $this->filterBySellerId ?: null)
                     ->relationship('author', 'name'),
-            ])->filtersLayout(FiltersLayout::Modal)
+            ])
+            ->filtersLayout(FiltersLayout::AboveContent)
             ->paginated([21, 36, 60]);
     }
     public function render(): \Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\View\View

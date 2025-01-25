@@ -18,6 +18,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Concerns\InteractsWithInfolists;
 use Filament\Infolists\Contracts\HasInfolists;
 use Filament\Infolists\Infolist;
+use Filament\Support\Enums\IconPosition;
 use Filament\Support\Enums\VerticalAlignment;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;
@@ -50,21 +51,26 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                 Split::make([
                     Group::make([
                         ImageEntry::make('images')
-                            ->label('')
+                            ->label(false)
                             ->extraImgAttributes([
                                 'class' => 'rounded hover:cursor-pointer',
                                 'data-fancybox' => "images",
                             ]),
+
                         Section::make([
                             TextEntry::make('game.title')
-                                ->label('')
+                                ->label(false)
                                 ->badge(),
                             TextEntry::make('title')
-                                ->label(''),
+                                ->label(false),
+                        ]),
+
+                        Section::make([
                             TextEntry::make('description')
                                 ->html()
                                 ->label('Опис'),
                         ]),
+
                         TextEntry::make('created_at')
                             ->dateTime('H:i M d, Y')
                             ->label('Створено: '),
@@ -73,7 +79,9 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                         Section::make([
                             TextEntry::make('author.name')
                                 ->url(fn ($record) => route('seller.show', $record->author->id), true)
-                                ->label(''),
+                                ->icon('heroicon-o-arrow-top-right-on-square')
+                                ->iconPosition(IconPosition::After)
+                                ->label(false),
                             TextEntry::make('author.orders_count')
                                 ->getStateUsing(fn () => $this->userOrderCount)
                                 ->inlineLabel()
