@@ -73,10 +73,16 @@ class ProductResource extends Resource
                     Forms\Components\Section::make([
 
                         Forms\Components\Select::make('game_id')
+                            ->label('Гра')
                             ->relationship('game', 'title')
                             ->required(),
 
+                        Forms\Components\Select::make('product_type_id')
+                            ->label('Тип продукту')
+                            ->relationship('product_type', 'title'),
+
                         Forms\Components\TextInput::make('price')
+                            ->label('Ціна')
                             ->required()
                             ->numeric()
                             ->minValue(0)
@@ -84,6 +90,7 @@ class ProductResource extends Resource
                             ->default(0),
 
                         Forms\Components\TextInput::make('quantity')
+                            ->label('Кількість')
                             ->required()
                             ->numeric()
                             ->minValue(1)
@@ -115,7 +122,8 @@ class ProductResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('game.title')
-                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('product_type.title')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

@@ -7,7 +7,9 @@ use App\Models\Seller;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\Grid;
 use Filament\Infolists\Components\Actions;
+use Filament\Infolists\Components\Fieldset;
 use Filament\Infolists\Components\Group;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Split;
@@ -61,6 +63,11 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                             TextEntry::make('game.title')
                                 ->label(false)
                                 ->badge(),
+
+                            TextEntry::make('product_type.title')
+                                ->label(false)
+                                ->badge(),
+
                             TextEntry::make('title')
                                 ->label(false),
                         ]),

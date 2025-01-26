@@ -53,8 +53,11 @@ class ListProducts extends Component implements HasForms, HasTable
                         ]),
                     Stack::make([
                         TextColumn::make('game.title')
-                            ->badge()
-                            ->numeric(),
+                            ->badge(),
+
+                        TextColumn::make('product_type.title')
+                            ->badge(),
+
                         TextColumn::make('title')
                             ->limit(60)
                             ->wrap()
@@ -79,8 +82,14 @@ class ListProducts extends Component implements HasForms, HasTable
                 SelectFilter::make('games')
                     ->label('Гра')
                     ->relationship('game', 'title'),
+
+                SelectFilter::make('product_types')
+                    ->label('Матеріал')
+                    ->relationship('product_type', 'title'),
+
                 SelectFilter::make('author')
                     ->label(__('Автор'))
+                    ->searchable()
                     ->default(fn() => $this->filterBySellerId ?: null)
                     ->relationship('author', 'name'),
             ])

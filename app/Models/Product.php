@@ -52,4 +52,9 @@ class Product extends Model
     {
         return $this->belongsTo(Game::class);
     }
+
+    public function product_type(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(ProductType::class);
+    }
 }
