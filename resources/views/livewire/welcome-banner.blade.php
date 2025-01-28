@@ -7,7 +7,10 @@
         </div>
 
         <div class="flex gap-2">
-            <x-filament::button color="gray">Про нас</x-filament::button>
+            <a href="{{ route('about-us') }}">
+                <x-filament::button color="gray">Про нас</x-filament::button>
+            </a>
+
             <a href="{{ route('registration') }}">
                 <x-filament::button>Стати продавцем</x-filament::button>
             </a>

@@ -17,6 +17,7 @@ Route::get('/checkout/{product}', function (\App\Models\Product $product) {
 })->name('checkout.product');
 
 Route::get('/contact-us', fn() => view('pages.contact-us'))->name('contact-us');
+Route::get('/about-us', fn() => view('pages.about-us'))->name('about-us');
 
 Route::get('/thank-you', function () {
     return view('pages.thank-you');
