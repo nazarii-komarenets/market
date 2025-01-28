@@ -2,8 +2,10 @@
 
 namespace App\Filament\Account\Resources;
 
+use App\Enums\OrderStatus;
 use App\Filament\Account\Resources\OrderResource\Pages;
 use App\Filament\Account\Resources\OrderResource\RelationManagers;
+use App\Filament\Tables\Columns\StatusColumn;
 use App\Models\Order;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -61,9 +63,13 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('status.name')
-                    ->numeric()
-                    ->sortable(),
+//                Tables\Columns\TextColumn::make('status.name')
+//                    ->numeric()
+//                    ->sortable(),
+                StatusColumn::make('status.name')
+                    ->label(__('Status'))
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('author.name')
                     ->numeric()
                     ->sortable(),
