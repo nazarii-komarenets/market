@@ -49,6 +49,7 @@ class AccountPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
+            ->databaseNotifications()
             ->navigationItems([
                 NavigationItem::make('main_page')
                     ->label('Головна сторінка')

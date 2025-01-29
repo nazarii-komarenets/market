@@ -2,9 +2,8 @@
 
 namespace App\Notifications;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
@@ -13,12 +12,12 @@ class CheckoutNotification extends Notification
 {
     use Queueable;
 
-    protected array $order;
+    protected Order $order;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(array $order)
+    public function __construct(Order $order)
     {
         $this->order = $order;
     }

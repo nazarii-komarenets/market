@@ -75,11 +75,10 @@ class CheckoutProduct extends Component implements HasForms, HasInfolists, HasAc
     public function create(): void
     {
         $order = $this->form->getState();
-        Order::create($order);
+        $order = Order::create($order);
 
         app(CheckoutNotificationController::class)
-            ->send($order, $order['author_id']);
-
+            ->send($order);
 
         $this->redirect(route('thank-you'));
     }

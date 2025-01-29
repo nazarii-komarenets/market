@@ -63,9 +63,6 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-//                Tables\Columns\TextColumn::make('status.name')
-//                    ->numeric()
-//                    ->sortable(),
                 StatusColumn::make('status.name')
                     ->label(__('Status'))
                     ->sortable()

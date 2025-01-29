@@ -13,7 +13,6 @@ class OrderOverview extends BaseWidget
     {
         return [
             Stat::make('Всього замовлень',  app(UserRepository::class)->getOrderCount(Auth::id())),
-
         ];
     }
 }
