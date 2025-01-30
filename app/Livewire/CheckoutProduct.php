@@ -9,6 +9,7 @@ use App\Models\OrderStatus;
 use App\Models\Product;
 use App\Models\User;
 use App\Notifications\TelegramNotification;
+use App\Services\OrderNotificationService;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Actions\CreateAction;
@@ -39,6 +40,13 @@ class CheckoutProduct extends Component implements HasForms, HasInfolists, HasAc
     public Product $product;
 
     public ?array $data = [];
+
+    protected OrderNotificationService $orderNotificationService;
+
+    public function __construct()
+    {
+        $this->orderNotificationService = app(OrderNotificationService::class);
+    }
 
     public function mount(Product $product): void
     {
@@ -77,8 +85,7 @@ class CheckoutProduct extends Component implements HasForms, HasInfolists, HasAc
         $order = $this->form->getState();
         $order = Order::create($order);
 
-        app(CheckoutNotificationController::class)
-            ->send($order);
+        $this->orderNotificationService->sendNotification($order);
 
         $this->redirect(route('thank-you'));
     }

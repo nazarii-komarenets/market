@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
 
-class CheckoutNotification extends Notification
+class TelegramCheckoutNotification extends Notification
 {
     use Queueable;
 
