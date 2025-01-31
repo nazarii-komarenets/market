@@ -15,7 +15,6 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Livewire\Component;
-use Tapp\FilamentValueRangeFilter\Filters\ValueRangeFilter;
 
 class ListProducts extends Component implements HasForms, HasTable
 {
@@ -92,9 +91,7 @@ class ListProducts extends Component implements HasForms, HasTable
                     ->searchable()
                     ->default(fn() => $this->filterBySellerId ?: null)
                     ->relationship('author', 'name'),
-            ])
-            ->filtersLayout(FiltersLayout::AboveContent)
-            ->paginated([21, 36, 60]);
+            ]);
     }
     public function render(): \Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {

@@ -19,14 +19,11 @@ class SellerController extends Controller
 
     public function index()
     {
-        return view('pages.products');
+        return view('pages.seller.list');
     }
 
     public function show(Seller $seller)
     {
-//        dd($seller);
-//        $userOrderCount = $this->userRepository->getOrderCount($product->author_id);
-
         return view('pages.seller', compact('seller'));
     }
 }

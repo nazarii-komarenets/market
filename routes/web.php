@@ -10,6 +10,7 @@ Route::get('/account/registration', \App\Filament\Pages\Auth\Register::class)->n
 Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index'])->name('product.list');
 Route::get('/products/{product}', [\App\Http\Controllers\ProductController::class, 'show'])->name('product.view');
 
+Route::get('/sellers', [\App\Http\Controllers\SellerController::class, 'index'])->name('seller.list');
 Route::get('/sellers/{seller}', [\App\Http\Controllers\SellerController::class, 'show'])->name('seller.show');
 
 Route::get('/checkout/{product}', function (\App\Models\Product $product) {

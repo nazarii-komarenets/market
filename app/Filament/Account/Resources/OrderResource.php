@@ -34,28 +34,37 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('status_id')
-                    ->relationship('status', 'name')
-                    ->required(),
-                Forms\Components\Select::make('product_id')
-                    ->label(__('Product'))
-                    ->relationship('product', 'title')
-                    ->disabled(),
-                Forms\Components\TextInput::make('client_phone')
-                    ->label(__('Client_Phone'))
-                    ->tel()
-                    ->disabled()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('client_address')
-                    ->label(__('Client_Address'))
-                    ->required()
-                    ->disabled()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('note')
-                    ->required()
-                    ->disabled()
-                    ->label(__('Note'))
-                    ->columnSpanFull(),
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\Split::make([
+                            Forms\Components\Select::make('status_id')
+                                ->relationship('status', 'name')
+                                ->required(),
+                            Forms\Components\Select::make('product_id')
+                                ->label(__('Product'))
+                                ->relationship('product', 'title')
+                                ->disabled(),
+                        ]),
+
+                        Forms\Components\Split::make([
+                            Forms\Components\TextInput::make('client_phone')
+                                ->label(__('Client_Phone'))
+                                ->tel()
+                                ->disabled()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('client_address')
+                                ->label(__('Client_Address'))
+                                ->required()
+                                ->disabled()
+                                ->maxLength(255),
+                        ]),
+
+                        Forms\Components\Textarea::make('note')
+                            ->required()
+                            ->disabled()
+                            ->label(__('Note'))
+                            ->columnSpanFull(),
+                    ])
             ]);
     }
 
@@ -88,7 +97,8 @@ class OrderResource extends Resource
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('status')
+                    ->relationship('status', 'name'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
