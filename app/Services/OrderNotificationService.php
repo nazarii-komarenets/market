@@ -31,7 +31,7 @@ class OrderNotificationService
 
             $user->notify(new OrderCreatedNotification($order));
 
-            if (!empty($user->telegram_chat_id)) {
+            if (!empty($user->telegram_chat_id) && $user->settings->telegram_notifications_enabled) {
                 $user->notify(new TelegramCheckoutNotification($order));
             }
 

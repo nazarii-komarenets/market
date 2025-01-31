@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Account\Pages\UserSettingsPage;
 use App\Filament\Account\Resources\OrderResource\Widgets\OrderOverview;
 use App\Filament\Account\Resources\ProductResource\Widgets\ProductOverview;
 use App\Filament\Account\Widgets\ConnectTelegram;
@@ -48,6 +49,7 @@ class AccountPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Account/Pages'), for: 'App\\Filament\\Account\\Pages')
             ->pages([
                 Pages\Dashboard::class,
+                UserSettingsPage::class,
             ])
             ->databaseNotifications()
             ->navigationItems([
