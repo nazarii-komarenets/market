@@ -2,7 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Account\Pages\UserSettingsPage;
+use App\Filament\Account\Pages\NotificationsPage;
 use App\Filament\Account\Resources\OrderResource\Widgets\OrderOverview;
 use App\Filament\Account\Resources\ProductResource\Widgets\ProductOverview;
 use App\Filament\Account\Widgets\ConnectTelegram;
@@ -15,6 +15,7 @@ use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
@@ -49,7 +50,7 @@ class AccountPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Account/Pages'), for: 'App\\Filament\\Account\\Pages')
             ->pages([
                 Pages\Dashboard::class,
-                UserSettingsPage::class,
+                NotificationsPage::class,
             ])
             ->databaseNotifications()
             ->navigationItems([
@@ -58,6 +59,12 @@ class AccountPanelProvider extends PanelProvider
                     ->url('/', shouldOpenInNewTab: true)
                     ->sort(100)
                     ->icon('heroicon-o-arrow-right-start-on-rectangle')
+            ])
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('Налаштування')
+                    ->collapsible()
+                    ->icon('heroicon-o-cog'),
             ])
             ->discoverWidgets(in: app_path('Filament/Account/Widgets'), for: 'App\\Filament\\Account\\Widgets')
             ->widgets([
