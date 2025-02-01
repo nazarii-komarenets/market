@@ -13,12 +13,11 @@ class UserRepository
         $this->user = $user;
     }
 
-    /**
-     * Get order count for a specific user
-     *
-     * @param int $userId
-     * @return int
-     */
+    public function getById(int $id): User
+    {
+        return $this->user->findOrFail($id);
+    }
+
     public function getOrderCount(int $userId): int
     {
         return $this->user->withCount('orders')->find($userId)->orders_count;
