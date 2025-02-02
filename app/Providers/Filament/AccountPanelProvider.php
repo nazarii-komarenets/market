@@ -10,6 +10,7 @@ use App\Filament\Account\Widgets\WelcomePage;
 use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Auth\Register;
+use App\Filament\Resources\ImprovementRequestResource;
 use App\Http\Middleware\IsAdmin;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
@@ -65,6 +66,9 @@ class AccountPanelProvider extends PanelProvider
                     ->label('Налаштування')
                     ->collapsible()
                     ->icon('heroicon-o-cog'),
+            ])
+            ->resources([
+                ImprovementRequestResource::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Account/Widgets'), for: 'App\\Filament\\Account\\Widgets')
             ->widgets([
