@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Users
         $this->call([
             SuperAdminSeeder::class,
             UserSeeder::class,
@@ -21,6 +20,7 @@ class DatabaseSeeder extends Seeder
         // Products
         $this->call([
             GameSeeder::class,
+            ProductTypeSeeder::class,
             ProductSeeder::class,
         ]);
 

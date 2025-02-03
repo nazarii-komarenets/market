@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Game;
+use App\Models\ProductType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -30,6 +31,7 @@ class ProductFactory extends Factory
             'description' => $this->faker->text,
             'quantity' => random_int(1, 20),
             'game_id' => Game::inRandomOrder()->first()->id,
+            'product_type_id' => ProductType::inRandomOrder()->first()->id,
             'author_id' => User::inRandomOrder()->first()->id,
         ];
     }

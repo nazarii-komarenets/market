@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Account\Resources\ImprovementRequestResource\Pages\CreateImprovementRequests;
 use App\Filament\Account\Resources\ImprovementRequestResource\Pages\ListImprovementRequests;
+use App\Services\ImprovementRequestsService;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Forms;
@@ -57,9 +58,9 @@ class ImprovementRequestResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn ($state) => match ($state) {
-                        'pending' => 'warning',
-                        'approved' => 'success',
-                        'rejected' => 'danger',
+                        ImprovementRequestStatus::Pending => 'warning',
+                        ImprovementRequestStatus::Approved => 'success',
+                        ImprovementRequestStatus::Rejected => 'danger',
                         default => 'gray',
                     }),
                 Tables\Columns\TextColumn::make('user.name')
@@ -112,13 +113,11 @@ class ImprovementRequestResource extends Resource
         ];
     }
 
-    public static function changeStatus($record, $status)
+    public static function changeStatus($record, $status): void
     {
         $record->update(['status' => $status]);
 
-        Notification::make()
-            ->title("Ваш запит {$record->title} було " . ($status === ImprovementRequestStatus::Approved ? 'схвалено' : 'відхилено'))
-            ->sendToDatabase($record->user);
+        app(ImprovementRequestsService::class)->sendNotification($record);
     }
 
     public static function canEdit(Model $record): bool
