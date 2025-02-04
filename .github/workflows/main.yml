@@ -11,7 +11,7 @@ jobs:
       - name: rsync deploy
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -avzr --delete
+          switches: -avzr --delete --exclude=".env"
           path: .
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_user: ${{ secrets.REMOTE_USER }}
@@ -19,3 +19,5 @@ jobs:
           remote_key_pass: ${{ secrets.REMOTE_KEY_PASS }}
           remote_path: ${{ secrets.REMOTE_PATH }}
 
+      - name: Install composer dependencies
+        run: composer install -n --prefer-dist
