@@ -18,3 +18,6 @@ jobs:
           remote_key: ${{ secrets.REMOTE_KEY }}
           remote_key_pass: ${{ secrets.REMOTE_KEY_PASS }}
           remote_path: ${{ secrets.REMOTE_PATH }}
+
+      - name: Storage link
+        run: php artisan storage:link
