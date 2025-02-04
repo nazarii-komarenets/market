@@ -18,21 +18,10 @@ jobs:
       - name: rsync deploy
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -avzr --delete --exclude=".env" --exclude="/vendor/"
+          switches: -avzr --delete --exclude=".env" --exclude="/vendor/" --exclude="/storage/"
           path: .
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_user: ${{ secrets.REMOTE_USER }}
           remote_key: ${{ secrets.REMOTE_KEY }}
           remote_key_pass: ${{ secrets.REMOTE_KEY_PASS }}
           remote_path: ${{ secrets.REMOTE_PATH }}
-
-      - name: SSH into server and setup Laravel
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.REMOTE_KEY }}
-          passphrase: ${{ secrets.REMOTE_KEY_PASS }}
-          script: |
-            cd ${{ secrets.REMOTE_PATH }}
-            php artisan storage:link
