@@ -31,9 +31,8 @@
     @filamentStyles
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-50 font-sans antialiased">
-    @livewire('notifications')
 
+<body class="bg-gray-50 font-sans antialiased">
     <div class="max-w-5xl mx-auto py-5 min-h-screen" style="padding: 0 10px 0 10px;">
         <x-navbar />
 
