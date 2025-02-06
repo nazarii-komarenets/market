@@ -19,9 +19,9 @@ class ProductController extends Controller
         return view('pages.products');
     }
 
-    public function show(Product $product)
+    public function show(int|string $author_id, Product $product): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
-        $userOrderCount = $this->userRepository->getOrderCount($product->author_id);
+        $userOrderCount = $this->userRepository->getOrderCount($author_id);
 
         return view('pages.product', [
             'product' => $product,
