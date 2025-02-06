@@ -56,13 +56,12 @@ class ImprovementRequestResource extends Resource
             ))
             ->columns([
                 Tables\Columns\TextColumn::make('status')
-                    ->badge()
                     ->color(fn ($state) => match ($state) {
                         ImprovementRequestStatus::Pending => 'warning',
                         ImprovementRequestStatus::Approved => 'success',
                         ImprovementRequestStatus::Rejected => 'danger',
                         default => 'gray',
-                    }),
+                    })->badge(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->visible(fn ($record) => auth()->user()->is_admin)
                     ->sortable(),

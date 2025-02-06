@@ -8,6 +8,7 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateImprovementRequests extends CreateRecord
 {
     protected static string $resource = ImprovementRequestResource::class;
+    protected static ?string $navigationLabel = "Створення Запиту на покращення";
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
