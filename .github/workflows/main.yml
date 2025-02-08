@@ -38,3 +38,5 @@ jobs:
             export PATH=/usr/local/php82/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
             php artisan migrate --force
             php artisan storage:link
+            php artisan route:clear
+            php artisan optimize
