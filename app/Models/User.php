@@ -92,6 +92,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasOne(UserSettings::class);
     }
 
+    public function delivery_options(): HasOne
+    {
+        return $this->hasOne(DeliveryOption::class);
+    }
+
     public function improvement_requests(): HasMany
     {
         return $this->HasMany(ImprovementRequest::class);
