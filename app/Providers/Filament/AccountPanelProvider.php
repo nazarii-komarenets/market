@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Account\Pages\DeliveryOptionsPage;
 use App\Filament\Account\Pages\NotificationsPage;
 use App\Filament\Account\Resources\OrderResource\Widgets\OrderOverview;
 use App\Filament\Account\Resources\ProductResource\Widgets\ProductOverview;
@@ -52,6 +53,7 @@ class AccountPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
                 NotificationsPage::class,
+                DeliveryOptionsPage::class,
             ])
             ->databaseNotifications()
             ->navigationItems([
