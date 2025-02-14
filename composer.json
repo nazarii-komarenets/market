@@ -6,12 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "fauzie811/filament-list-entry": "^1.0",
         "filament/filament": "^3.2",
+        "filament/notifications": "^3.2.108",
         "laravel-notification-channels/telegram": "^5.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-        "tapp/filament-value-range-filter": "^1.0",
-        "filament/notifications": "^3.2.108"
+        "tapp/filament-value-range-filter": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

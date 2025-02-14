@@ -3,25 +3,24 @@
 namespace App\Livewire;
 
 use App\Models\Product;
-use App\Models\Seller;
+use App\Traits\Badges\HasDeliveryOptions;
+use App\Traits\Badges\HasProductBadges;
+use Fauzie811\FilamentListEntry\Infolists\Components\ListEntry;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Components\Grid;
-use Filament\Infolists\Components\Actions;
-use Filament\Infolists\Components\Fieldset;
-use Filament\Infolists\Components\Group;
-use Filament\Infolists\Components\ImageEntry;
-use Filament\Infolists\Components\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Infolists\Components\Actions;
+use Filament\Infolists\Components\Group;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\Split;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Concerns\InteractsWithInfolists;
 use Filament\Infolists\Contracts\HasInfolists;
 use Filament\Infolists\Infolist;
 use Filament\Support\Enums\IconPosition;
-use Filament\Support\Enums\VerticalAlignment;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;
 
@@ -30,6 +29,7 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
     use InteractsWithActions;
     use InteractsWithInfolists;
     use InteractsWithForms;
+    use HasProductBadges, HasDeliveryOptions;
 
     public Product $product;
     public int $userOrderCount;
@@ -60,13 +60,11 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                             ]),
 
                         Section::make([
-                            TextEntry::make('game.title')
+                            ListEntry::make('badges')
                                 ->label(false)
-                                ->badge(),
-
-                            TextEntry::make('product_type.title')
-                                ->label(false)
-                                ->badge(),
+                                ->inline(true)
+                                ->getStateUsing(fn (Product $record) => static::getProductState($record))
+                                ->badge(true),
 
                             TextEntry::make('title')
                                 ->label(false),
@@ -76,6 +74,11 @@ class ViewProduct extends Component implements HasForms, HasInfolists, HasAction
                             TextEntry::make('description')
                                 ->html()
                                 ->label('Опис'),
+
+                            ListEntry::make('delivery_options')
+                                ->listStyle('inline')
+                                ->getStateUsing(fn (Product $record) => static::getDeliveryOptions($record->author))
+                                ->label('Доставка'),
                         ]),
 
                         TextEntry::make('created_at')
